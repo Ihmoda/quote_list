@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Quote List</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+    crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container">
+    <div class="col-md-12">
+      <h1>Quotes List</h1>
+      <div *ngIf='quoteList.length == 0'>
+        <p>There are currently now quotes! Add a quote above.</p>
+      </div>
+      <div *ngIf='quoteList.length > 0'>
+        <div class="row wrapper" *ngFor='let quote of quoteList; let i=index'>
+          <div class="col-md-7">
+            <p>{{quote.content}}</p>
+            <p>--{{quote.author}}</p>
+          </div>
+          <div class="col-md-2">
+            <h2 class="num" *ngIf="quote.ranking > 0">+{{quote.ranking}}</h2>
+            <h2 class="num" *ngIf="quote.ranking < 0">{{quote.ranking}}</h2>
+            <h2 class="num" *ngIf="quote.ranking == 0">{{quote.ranking}}</h2>
+          </div>
+          <div class="col-md-3">
+            <div class="col-md-12">
+              <form>
+                <button type="submit" (click)="addRank(i)"class="btn btn-success">Vote Up</button>
+              </form>
+            </div>
+            <div class="col-md-12">
+              <form>
+                <button type="submit" (click)="subtractRank(i)" class="btn btn-danger">Vote Down</button>
+              </form>
+            </div>
+            <div class="col-md-12">
+              <form>
+                <button type="submit" (click)="deleteQuote(i)" class="btn btn-warning">Delete</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
